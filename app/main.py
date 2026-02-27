@@ -4,11 +4,19 @@ import tkinter as tk
 from tkinter import ttk
 from llama_cpp import Llama
 import threading
+import os
 
-from numpy import insert
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+model_path = os.path.join(
+    BASE_DIR,      
+    "../models",   
+    "qwen2.5-coder-3b-instruct-q4_k_m.gguf"
+)
 
-model_path = "/Users/slavkomencevski/.lmstudio/models/Triangle104/Qwen2.5-Coder-3B-Instruct-Q4_K_M-GGUF/qwen2.5-coder-3b-instruct-q4_k_m.gguf"
+if not os.path.exists(model_path):
+    raise ValueError(f"Model file not found at {model_path}")
+
 llm = Llama(model_path=model_path)
 
 llm_modes = {
